@@ -1,8 +1,6 @@
 require 'sinatra'
 require 'thin'
 require 'haml'
-require 'json'
-require 'mysql2'
 
 get '/' do
 	@title = "The Casualty Report"
