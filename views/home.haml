@@ -1,0 +1,25 @@
+.navbar.navbar-inverse.navbar-fixed-top
+	.navbar-inner
+		.container
+			%button.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse", :type => "button"}
+				%span.icon-bar
+				%span.icon-bar
+				%span.icon-bar
+			.nav-collapse.collapse
+				%i
+					%ul.nav
+						%li.active
+							%a{:href => "/"} The Casualty Report
+						%li
+							%a{:href => "/projects"} My Other Projects
+						%li
+							%a{:href => "/about"} About Me
+.container
+	.hero-unit
+		%p
+			This is me, playing around with Sinatra.
+		%p
+			I'm still working out how I can get it to post to a MySQL database. I'm using AppFog's platform which is particularly interesting as I haven't figured out how to use their <code>VCAP_SERVICES</code> environment variable.
+		%p
+			%i
+				I hope to have more soon!
