@@ -2,6 +2,11 @@ require 'sinatra'
 require 'thin'
 require 'haml'
 
+# WOT Verification
+get '/mywot*.html' do
+	@wot = ENV['WOT']
+end
+
 get '/' do
 	@title = "The Casualty Report"
   haml :home
