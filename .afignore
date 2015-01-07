@@ -1,8 +1,0 @@
-.gitignore
-*.[oa]
-*~
-*.bak
-*.sublime-project
-*.sublime-workspace
-*.erb
-*.yml
