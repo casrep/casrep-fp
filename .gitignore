@@ -1,8 +1,8 @@
+.afignore
 *.[oa]
 *~
 *.bak
 *.sublime-project
 *.sublime-workspace
-*.afignore
 *.erb
 *.yml
