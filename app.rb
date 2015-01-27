@@ -1,6 +1,5 @@
 require 'sinatra'
 require 'thin'
-require 'haml'
 
 # WOT Verification
 get '/mywot*.html' do
@@ -9,20 +8,15 @@ end
 
 get '/' do
 	@title = "The Casualty Report"
-  haml :home
+  erb :home
 end
 
 get '/projects' do
 	@title = "Derek's Projects"
-	haml :projects
+	erb :projects
 end
 
 get '/about' do
 	@title = "About Derek"
-	haml :about
-end
-
-get '/test' do
-	@title = "Testing"
-	haml :test
+	erb :about
 end
