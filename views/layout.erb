@@ -9,7 +9,34 @@
 		</style>
 	</head>
 	<body>
+		<div class="navbar navbar-inverse navbar-fixed-top">
+			<div class="navbar-inner">
+				<div class="container">
+					<button class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse" type="button">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<div class="nav-collapse collapse">
+						<ul class="nav">
+							<li>
+								<a href="/">The Casualty Report</a>
+							</li>
+							<li>
+								<a href="/interesting">Things of Interest</a>
+							</li>
+							<li>
+								<a href="/projects">My Other Projects</a>
+							</li>
+							<li>
+								<a href="/about">About Me</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
 		<%= yield %>
+		</div>
 		<script src="/js/bootstrap.min.js" />
 	</body>
 </html>
