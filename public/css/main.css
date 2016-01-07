@@ -1,0 +1,25 @@
+.my-background {
+	/*background-color: #1A004D;*/
+	background-color: #1A1A1A;
+}
+
+/*.btn-primary {
+	color: #1A004D;
+	background-color: #E6E6E6;
+	border-color: #E6E6E6;
+}*/
+p {
+	color: #E6E6E6;
+}
+
+a {
+	color: #47AAFF;
+}
+
+a:hover {
+	color: #47AAFF;
+}
+
+.btn:hover {
+  color: #E6E6E6;
+}
