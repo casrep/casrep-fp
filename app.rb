@@ -1,6 +1,6 @@
 require 'rubygems'
 require 'sinatra'
-require 'thin'
+# require 'thin'
 # require 'mysql'
 
 # begin
