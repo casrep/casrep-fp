@@ -1,3 +1,5 @@
 .afignore
 *.[oa]
 *~
+*.bak
+projects.erb
