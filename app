@@ -29,17 +29,17 @@ get '/interesting' do
 	erb :interesting
 end
 
-get '/projects' do
-	@title = 'Projects (CASREP)'
-	@page = 'Projects'
-	erb :projects
-end
-
 get '/about' do
 	@title = 'About (CASREP)'
 	@page = 'About'
 	erb :about
 end
+
+# get '/projects' do
+# 	@title = 'Projects (CASREP)'
+# 	@page = 'Projects'
+# 	erb :projects
+# end
 
 # get '/posts' do
 # 	@results = $db.query('SELECT * FROM posts')
