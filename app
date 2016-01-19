@@ -23,7 +23,7 @@ get '/' do
   erb :home
 end
 
-get '/interesting' do
+get '/toi' do
 	@title = 'Interesting (CASREP)'
 	@page = 'Things of Interest'
 	erb :interesting
