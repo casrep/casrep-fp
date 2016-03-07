@@ -1,6 +1,7 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-#ruby "2.0.0"
+ruby '2.1.5'
 
-gem "sinatra"
-gem "thin"
+gem 'sinatra'
+gem 'thin'
+gem 'pg'

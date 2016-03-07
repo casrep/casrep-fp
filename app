@@ -3,14 +3,26 @@
 require 'rubygems'
 require 'sinatra'
 require 'thin'
-# require 'mysql'
+require 'json'
+require 'pg'
 
-# begin
-#   $db = Mysql.new('localhost', 'root', 'TaykMeeOn-55', 'local')
-# rescue Mysql::Error
-#   puts 'Connection fall down, go boom.'
-#   exit 1
-# end
+begin
+	dbconf = File.read('config/db.json')
+	dbconf = JSON.parse(dbconf)
+	dbhost = dbconf['host']
+	dbport = dbconf['port']
+	dbname = dbconf['name']
+	dbuser = dbconf['user']
+	dbpass = dbconf['pass']
+
+	db = PG::connect(
+	    host:     dbhost,
+	    port:     dbport,
+	    user:     dbuser,
+	    password: dbpass,
+	    dbname:   dbname
+	)
+end
 
 # WOT Verification
 get '/mywot*.html' do
@@ -18,29 +30,22 @@ get '/mywot*.html' do
 end
 
 get '/' do
-	@title = 'Home (CASREP)'
-	@page = 'Home'
-  erb :home
+	@title   = 'Home (CASREP)'
+	@page    = 'Home'
+	@general = db.exec("SELECT data FROM content WHERE name = 'home-general'").getvalue(0,0)
+	erb :home
 end
 
 get '/toi' do
-	@title = 'Interesting (CASREP)'
-	@page = 'Things of Interest'
-	erb :interesting
+	@title   = 'Interesting (CASREP)'
+	@page    = 'Things of Interest'
+	@general = db.exec("SELECT data FROM content WHERE name = 'toi-general'").getvalue(0,0)
+	erb :toi
 end
 
 get '/about' do
-	@title = 'About (CASREP)'
-	@page = 'About'
+	@title   = 'About (CASREP)'
+	@page    = 'About'
+	@general = db.exec("SELECT data FROM content WHERE name = 'about-general'").getvalue(0,0)
 	erb :about
 end
-
-# get '/projects' do
-# 	@title = 'Projects (CASREP)'
-# 	@page = 'Projects'
-# 	erb :projects
-# end
-
-# get '/posts' do
-# 	@results = $db.query('SELECT * FROM posts')
-# end
