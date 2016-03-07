@@ -1,0 +1,8 @@
+{
+	"url":  "postgres://<username>:<password>@<hostname>:<port>/<database>",
+	"user": "<username>",
+	"pass": "<password>",
+	"host": "<hostname>",
+	"port": "<port>",
+	"name": "<database>"
+}
