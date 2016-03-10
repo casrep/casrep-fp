@@ -6,22 +6,6 @@ require 'thin'
 require 'json'
 require 'mysql2'
 
-#dbconf = File.read('config/db.json')
-#dbconf = JSON.parse(dbconf)
-#dbhost = dbconf['host']
-#dbport = dbconf['port']
-#dbname = dbconf['name']
-#dbuser = dbconf['user']
-#dbpass = dbconf['pass']
-#
-#db = PG::connect(
-#    host:     dbhost,
-#    port:     dbport,
-#    user:     dbuser,
-#    password: dbpass,
-#    dbname:   dbname
-#)
-
 if ENV['VCAP_SERVICES']
 	dbconf = JSON.parse(ENV['VCAP_SERVICES'])
 	dbconf = dbconf['ctl_mysql'][0]['credentials']
@@ -58,7 +42,6 @@ end
 get '/toi' do
 	@title   = 'Interesting (CASREP)'
 	@page    = 'Things of Interest'
-	#@general = db.exec("SELECT data FROM content WHERE name = 'toi-general'")
 	erb :toi
 end
 
