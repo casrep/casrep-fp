@@ -4,23 +4,39 @@ require 'rubygems'
 require 'sinatra'
 require 'thin'
 require 'json'
-require 'pg'
+require 'mysql2'
 
-begin
-	dbconf = File.read('config/db.json')
-	dbconf = JSON.parse(dbconf)
-	dbhost = dbconf['host']
-	dbport = dbconf['port']
-	dbname = dbconf['name']
-	dbuser = dbconf['user']
-	dbpass = dbconf['pass']
+#dbconf = File.read('config/db.json')
+#dbconf = JSON.parse(dbconf)
+#dbhost = dbconf['host']
+#dbport = dbconf['port']
+#dbname = dbconf['name']
+#dbuser = dbconf['user']
+#dbpass = dbconf['pass']
+#
+#db = PG::connect(
+#    host:     dbhost,
+#    port:     dbport,
+#    user:     dbuser,
+#    password: dbpass,
+#    dbname:   dbname
+#)
 
-	db = PG::connect(
-	    host:     dbhost,
-	    port:     dbport,
-	    user:     dbuser,
-	    password: dbpass,
-	    dbname:   dbname
+if ENV['VCAP_SERVICES']
+	dbconf = JSON.parse(ENV['VCAP_SERVICE'])
+	#dbhost = dbconf["host"]
+	#dbport = dbconf["port"]
+	#dbname = dbconf["dbname"]
+	#dbuser = dbconf["uname"]
+	#dbpass = dbconf["pword"]
+
+	db = Mysql2::Client.new(
+	    host:     "#{dbconf['host']}",
+	    port:     "#{dbconf['port']}",
+	    database: "#{dbconf['name']}",
+	    username: "#{dbconf['username']}",
+	    password: "#{dbconf['password']}",
+	    reconnect: true
 	)
 end
 
@@ -32,20 +48,20 @@ end
 get '/' do
 	@title   = 'Home (CASREP)'
 	@page    = 'Home'
-	@general = db.exec("SELECT data FROM content WHERE name = 'home-general'").getvalue(0,0)
+	@general = db.query("SELECT data FROM content WHERE name = 'home-general'")
 	erb :home
 end
 
 get '/toi' do
 	@title   = 'Interesting (CASREP)'
 	@page    = 'Things of Interest'
-	@general = db.exec("SELECT data FROM content WHERE name = 'toi-general'").getvalue(0,0)
+	@general = db.exec("SELECT data FROM content WHERE name = 'toi-general'")
 	erb :toi
 end
 
 get '/about' do
 	@title   = 'About (CASREP)'
 	@page    = 'About'
-	@general = db.exec("SELECT data FROM content WHERE name = 'about-general'").getvalue(0,0)
+	@general = db.query("SELECT data FROM content WHERE name = 'about-general'")
 	erb :about
 end
