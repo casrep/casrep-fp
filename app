@@ -16,27 +16,29 @@ if ENV['VCAP_SERVICES']
 	username = dbconf['username']
 	password = dbconf['password']
 elsif ENV['DATABASE_URL']
-	dbconf   = URI(ENV['DATABASE_URL'].split
-	host     = dbconf[3]
-	port     = dbconf[4]
-	database = dbconf[6]
-	userinfo = dbconf[2].split(":")
+	dbconf   = URI(ENV['DATABASE_URL'])
+	host     = dbconf.host
+	port     = dbconf.port
+	database = dbconf.path.gsub(/\//,"")
+	userinfo = dbconf.userinfo.split(":")
 	username = userinfo[0]
 	password = userinfo[1]
-	puts "dbconf: " + dbconf
-	puts "userinfo: " + userinfo
-	puts "username: " + username
-	puts "password: " + password
 end
 
-db = Mysql2::Client.new(
-    host:      host,
-    port:      port,
-    database:  database,
-    username:  username,
-    password:  password,
-    reconnect: true
-)
+begin
+	db = Mysql2::Client.new(
+	    host:      host,
+	    port:      port,
+	    database:  database,
+	    username:  username,
+	    password:  password,
+	    reconnect: true
+	)
+rescue Mysql2::Error => e
+	puts e
+	exit
+end
+
 
 # WOT Verification
 get '/mywot*.html' do
