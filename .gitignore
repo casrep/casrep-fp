@@ -1,5 +1,6 @@
 *.[oa]
 *~
 *.swp
+manifest.yml
 backups/
 config/
