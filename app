@@ -23,6 +23,10 @@ elsif ENV['DATABASE_URL']
 	userinfo = dbconf[2].split(":")
 	username = userinfo[0]
 	password = userinfo[1]
+	puts "dbconf: " + dbconf
+	puts "userinfo: " + userinfo
+	puts "username: " + username
+	puts "password: " + password
 end
 
 db = Mysql2::Client.new(
