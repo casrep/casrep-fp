@@ -1,3 +1,9 @@
 ---
 applications:
 - name: frontpage
+  memory: 64M
+  instances: 1
+  host: frontpage
+  domain: useast.appfog.ctl.io
+  services:
+  - frontpage-mysql
