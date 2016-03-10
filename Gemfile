@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
 
-ruby '2.1.5'
+ruby '2.3.0'
 
 gem 'sinatra'
 gem 'thin'
-gem 'pg'
+gem 'mysql2'
+#gem 'pg'

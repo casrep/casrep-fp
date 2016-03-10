@@ -23,7 +23,8 @@ require 'mysql2'
 #)
 
 if ENV['VCAP_SERVICES']
-	dbconf = JSON.parse(ENV['VCAP_SERVICE'])
+	dbconf = JSON.parse(ENV['VCAP_SERVICES'])
+	dbconf = dbconf['ctl_mysql'][0]['credentials']
 	#dbhost = dbconf["host"]
 	#dbport = dbconf["port"]
 	#dbname = dbconf["dbname"]
@@ -31,11 +32,11 @@ if ENV['VCAP_SERVICES']
 	#dbpass = dbconf["pword"]
 
 	db = Mysql2::Client.new(
-	    host:     "#{dbconf['host']}",
-	    port:     "#{dbconf['port']}",
-	    database: "#{dbconf['name']}",
-	    username: "#{dbconf['username']}",
-	    password: "#{dbconf['password']}",
+	    host:      dbconf['host'],
+	    port:      dbconf['port'],
+	    database:  dbconf['name'],
+	    username:  dbconf['username'],
+	    password:  dbconf['password'],
 	    reconnect: true
 	)
 end
@@ -48,20 +49,24 @@ end
 get '/' do
 	@title   = 'Home (CASREP)'
 	@page    = 'Home'
-	@general = db.query("SELECT data FROM content WHERE name = 'home-general'")
+	db.query("SELECT data FROM content WHERE name = 'home-general'").each do |result|
+		@general = result['data']
+	end
 	erb :home
 end
 
 get '/toi' do
 	@title   = 'Interesting (CASREP)'
 	@page    = 'Things of Interest'
-	@general = db.exec("SELECT data FROM content WHERE name = 'toi-general'")
+	#@general = db.exec("SELECT data FROM content WHERE name = 'toi-general'")
 	erb :toi
 end
 
 get '/about' do
 	@title   = 'About (CASREP)'
 	@page    = 'About'
-	@general = db.query("SELECT data FROM content WHERE name = 'about-general'")
+	db.query("SELECT data FROM content WHERE name = 'about-general'").each do |result|
+		@general = result['data']
+	end
 	erb :about
 end

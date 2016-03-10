@@ -3,7 +3,7 @@ GEM
   specs:
     daemons (1.2.3)
     eventmachine (1.0.8)
-    pg (0.18.4)
+    mysql2 (0.4.3)
     rack (1.6.4)
     rack-protection (1.5.3)
       rack
@@ -21,6 +21,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  pg
+  mysql2
   sinatra
   thin
+
+BUNDLED WITH
+   1.11.2
